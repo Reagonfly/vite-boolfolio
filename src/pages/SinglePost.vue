@@ -14,8 +14,13 @@ export default {
     mounted(){
         this.loading = true;
         axios.get(`${this.store.baseUrl}/api/posts/${this.$route.params.slug}`).then((response)=>{
-            this.post = response.data.post
-            this.loading = false;
+            if(response.data.success){
+                this.post = response.data.post
+                this.loading = false;
+            }
+            else{
+                $this.$router.push({name: 'not_found'})
+            }
         })
     }
 }
@@ -30,7 +35,7 @@ export default {
             <div class="col-12" v-else>
                 <div class="card d-flex justify-content-between my-3">
                     <div class="card-img-top" v-if="post.cover_img">
-                        <img src="`${store.baseUrl}/storage/${post.cover_img}`" class="img-fluid w-25 my-3">
+                        <img class="img-fluid" :src="post.cover_image != null ? `${store.baseUrl}/storage/${post.cover_image}` : 'https://via.placeholder.com/250x200'" :alt="post.title">
                     </div>
                     <div class="card-title">
                         <h2>Post Title: {{ post.title }}</h2>
