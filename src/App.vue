@@ -1,16 +1,21 @@
 <script >
-import PostMain from "./components/PostMain.vue";
+
+import AppHeader from "./components/AppHeader.vue";
+import AppFooter from "./components/AppFooter.vue";
 
 export default{
   components:{
-    PostMain
+    AppHeader,
+    AppFooter
   }
 }
 </script>
 
 <template>
 
-  <PostMain />
+  <AppHeader />
+  <router-view></router-view>
+  <AppFooter />
 
 </template>
 
