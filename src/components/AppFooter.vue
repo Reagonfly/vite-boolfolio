@@ -28,5 +28,11 @@ export default {
     .background-footer{
         background-color: grey;
         padding: 10px;
+        position: -webkit-sticky;
+        position: sticky;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0 0;
     }
 </style>

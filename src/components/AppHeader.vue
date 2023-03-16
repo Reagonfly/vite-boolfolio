@@ -7,6 +7,10 @@ export default {
                 {
                     label: 'Homepage',
                     routeName: 'homepage'
+                },
+                {
+                    label: 'Blog',
+                    routeName: 'post_list'
                 }
             ]
         }
@@ -39,7 +43,7 @@ export default {
     .nav-bg{
         background-color: rgb(34, 61, 112);
         .navbar-nav{
-            router-link{
+            .nav-link{
                 color: #fff;
             }
         }

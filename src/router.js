@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import HomePage from './pages/HomePage.vue';
-import PostMain from './components/PostMain.vue';
+import PostList from './pages/PostList.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -10,6 +10,11 @@ const router = createRouter({
             path: '/',
             name: 'homepage',
             component: HomePage
+        },
+        {
+            path: '/blog',
+            name: 'post_list',
+            component: PostList
         }
     ]
 });

@@ -1,8 +1,9 @@
-<script >
+<script>
 import axios from 'axios';
-import PostCard from './PostCard.vue';
+import PostCard from '../components/PostCard.vue';
 
     export default{
+        name: "PostList",
         data(){
             return{
                 posts: [],
@@ -41,7 +42,7 @@ import PostCard from './PostCard.vue';
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2 class="text-center"><strong>Boolpress</strong></h2>
+                <h2 class="text-center mt-3"><strong>Boolpress</strong></h2>
             </div>
             <h3>Posts List:</h3>
             <div v-if="loading" class="col-12 d-flex justify-content-center flex-wrap">
