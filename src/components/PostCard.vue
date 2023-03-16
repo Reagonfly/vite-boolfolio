@@ -1,18 +1,25 @@
 <script>
-    export default {
-        name: 'PostCard',
-        props:{
-            post: Object,
-            baseUrl: String
+
+import { store } from '../store';
+
+export default {
+    name: 'PostCard',
+    props:{
+        post: Object
+    },
+    data(){
+        return{
+            store
         }
     }
+}
 </script>
 
 <template lang="">
         <div class="card m-4">
             <div class="card-body">
                 <div class="img-top">
-                    <img class="img-fluid" :src="post.cover_image != null ? `${baseUrl}/storage/${post.cover_image}` : 'https://via.placeholder.com/250x200'" :alt="post.title">
+                    <img class="img-fluid" :src="post.cover_image != null ? `${store.baseUrl}/storage/${post.cover_image}` : 'https://via.placeholder.com/250x200'" :alt="post.title">
                 </div>
                 <div class="card-author py-2">
                     <h4>{{ post.author }}</h4>
@@ -32,7 +39,7 @@
                 <div class="card-text py-2">
                     {{ post.excerpt }}
                 </div>
-                <a href="#" class="btn btn-sm btn-secondary my-2">Continue To Read</a>
+                <router-link :to="{ name: 'single_post', params: { slug: post.slug}}" class="btn btn-sm btn-secondary">Continue to Read</router-link>
             </div>
         </div>
 </template>
