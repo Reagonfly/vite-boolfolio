@@ -6,15 +6,19 @@ import axios from 'axios';
             return{
                 posts: [],
                 loading: true,
-                baseUrl: 'http://127.0.0.1:8000'
+                baseUrl: 'http://127.0.0.1:8000',
+                currentPage: 1,
+                lastPage: null
             }
         },
         methods:{
-            getPosts(){
+            getPosts(post_page){
                 this.loading = true;
-                axios.get(`${this.baseUrl}/api/posts`).then((response) => {
+                axios.get(`${this.baseUrl}/api/posts`, { params: { page: post_page }}).then((response) => {
                     if(response.data.success){
-                        this.posts = response.data.results
+                        this.posts = response.data.results.data;
+                        this.currentPage = response.data.results.current_page;
+                        this.lastPage = response.data.results.last_page;
                         this.loading = false;
                     }
                     else{
@@ -24,7 +28,7 @@ import axios from 'axios';
             }
         },
         mounted(){
-            this.getPosts()
+            this.getPosts(this.currentPage);
         }
     }
 </script>
@@ -45,17 +49,31 @@ import axios from 'axios';
                         <div class="card my-3">
                             <div class="card-body">
                                 <div class="img-top">
-                                    <img class="img-fluid" :src="post.cover_image != null ? `${baseUrl}/${post.cover_image}` : 'https://via.placeholder.com/600x400'" :alt="post.title">
+                                    <img class="img-fluid" :src="post.cover_image != null ? `${baseUrl}/storage/${post.cover_image}` : 'https://via.placeholder.com/400x400'" :alt="post.title">
                                 </div>
-                                <div class="card-title">
+                                <div class="card-title py-2">
                                     <h4>{{ post.title }}</h4>
                                 </div>
-                                <div class="card-text">
+                                <div class="card-text py-2">
                                     {{ post.excerpt }}
                                 </div>
-                                <a href="#" class="btn btn-sm btn-secondary">Continue To Read</a>
+                                <a href="#" class="btn btn-sm btn-secondary my-2">Continue To Read</a>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <nav>
+                            <ul class="pagination d-flex justify-content-around">
+                                <li :class="currentPage === 1 ? 'disabled' : 'page-item'">
+                                    <button class="page-link btn btn-sm" @click="getPosts(currentPage - 1)">Previous page</button>
+                                </li>
+                                <li :class="currentPage === lastPage ? 'disabled' : 'page-item'">
+                                    <button class="page-link btn btn-sm" @click="getPosts(currentPage + 1)">Next page</button>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
