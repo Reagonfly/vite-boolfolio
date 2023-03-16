@@ -5,6 +5,7 @@ import PostList from './pages/PostList.vue';
 import SinglePost from './pages/SinglePost.vue';
 import NotFound from './pages/NotFound.vue';
 import Contacts from './pages/Contacts.vue';
+import ThankYou from './pages/ThankYou.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -28,6 +29,11 @@ const router = createRouter({
             path: '/contacts',
             name: 'contacts',
             component: Contacts
+        },
+        {
+            path: '/thank_you',
+            name: 'thank_you',
+            component: ThankYou
         },
         {
             path: '/*',

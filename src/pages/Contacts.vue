@@ -40,6 +40,10 @@ export default {
                     this.message = '';
                     this.success = true;
                     this.loading = false;
+
+                    setTimeout(()=>{
+                        this.$router.push({'name': 'thank_you'});
+                    }, 1000);
                     
                 }
             });
@@ -85,40 +89,43 @@ export default {
                         <div class="col-12 col-md-6 my-2">
                             <label class="control-label" for="name">Name</label>
                             <input type="text" class="form-control" name="name" id="name" placeholder="Name" v-model="name">
-                            <div v-if="errors != null" v-for="(error, index) in errors.name" :key="`message-error-${index}`" class="text-danger">
+                            <div v-for="(error, index) in errors.name" :key="`message-error-${index}`" class="text-danger">
                                 {{ error }}
                             </div>
                         </div>
                         <div class="col-12 col-md-6 my-2">
                             <label class="control-label" for="surname">Surname</label>
                             <input type="text" class="form-control" name="surname" id="surname" placeholder="Surname" v-model="surname">
-                            <div v-if="errors != null" v-for="(error, index) in errors.surname" :key="`message-error-${index}`" class="text-danger">
+                            <div v-for="(error, index) in errors.surname" :key="`message-error-${index}`" class="text-danger">
                                 {{ error }}
                             </div>
                         </div>
                         <div class="col-12 col-md-6 my-2">
                             <label class="control-label" for="email">Email</label>
                             <input type="mail" class="form-control" name="email" id="email" placeholder="Email" v-model="email">
-                            <div v-if="errors != null" v-for="(error, index) in errors.email" :key="`message-error-${index}`" class="text-danger">
+                            <div v-for="(error, index) in errors.email" :key="`message-error-${index}`" class="text-danger">
                                 {{ error }}
                             </div>
                         </div>
                         <div class="col-12 col-md-6 my-2">
                             <label class="control-label" for="phone">Phone nr.</label>
                             <input type="phone" class="form-control" name="phone" id="phone" placeholder="Phone nr." v-model="phone">
-                            <div v-if="errors != null" v-for="(error, index) in errors.phone" :key="`message-error-${index}`" class="text-danger">
+                            <div v-for="(error, index) in errors.phone" :key="`message-error-${index}`" class="text-danger">
                                 {{ error }}
                             </div>
                         </div>
                         <div class="col-12 my-2">
                             <label class="control-label" for="message">Write your Message here</label>
                             <textarea class="form-control" name="message" id="message" placeholder="Message" v-model="message"></textarea>
-                            <div v-if="errors != null" v-for="(error, index) in errors.message" :key="`message-error-${index}`" class="text-danger">
+                            <div v-for="(error, index) in errors.message" :key="`message-error-${index}`" class="text-danger">
                                 {{ error }}
                             </div>
                         </div>
                         <div class="col-12 my-2">
                             <button type="submit" class="btn btn-sm btn-secondary px-3" :disabled="loading">{{ loading ? 'sending...' : 'Send'}}</button>
+                        </div>
+                        <div class="my-3" v-if="success">
+                            Message sended successifully!
                         </div>
                     </div>
                 </form>
