@@ -49,10 +49,22 @@ import axios from 'axios';
                         <div class="card my-3">
                             <div class="card-body">
                                 <div class="img-top">
-                                    <img class="img-fluid" :src="post.cover_image != null ? `${baseUrl}/storage/${post.cover_image}` : 'https://via.placeholder.com/400x400'" :alt="post.title">
+                                    <img class="img-fluid" :src="post.cover_image != null ? `${baseUrl}/storage/${post.cover_image}` : 'https://via.placeholder.com/400x300'" :alt="post.title">
+                                </div>
+                                <div class="card-author py-2">
+                                    <h4>{{ post.author }}</h4>
                                 </div>
                                 <div class="card-title py-2">
                                     <h4>{{ post.title }}</h4>
+                                    <p>
+                                        <strong>Category:</strong> {{ post.category.name }}
+                                    </p>
+                                    <p>
+                                        <em>
+                                            <strong>Tags: </strong>
+                                            <span class="mx-1 btn btn-sm btn-primary" v-for="tag in post.tags"> {{ tag.name }} </span>                                            
+                                        </em>
+                                    </p>
                                 </div>
                                 <div class="card-text py-2">
                                     {{ post.excerpt }}
@@ -68,6 +80,9 @@ import axios from 'axios';
                             <ul class="pagination d-flex justify-content-around">
                                 <li :class="currentPage === 1 ? 'disabled' : 'page-item'">
                                     <button class="page-link btn btn-sm" @click="getPosts(currentPage - 1)">Previous page</button>
+                                </li>
+                                <li :class="currentPage === i ? 'disabled' : 'page-item'" v-for="i in lastPage">
+                                    <button class="page-link btn btn-sm" @click="getPosts(i)">{{ i }}</button>
                                 </li>
                                 <li :class="currentPage === lastPage ? 'disabled' : 'page-item'">
                                     <button class="page-link btn btn-sm" @click="getPosts(currentPage + 1)">Next page</button>
