@@ -1,5 +1,6 @@
 <script >
 import axios from 'axios';
+import PostCard from './PostCard.vue';
 
     export default{
         data(){
@@ -10,6 +11,9 @@ import axios from 'axios';
                 currentPage: 1,
                 lastPage: null
             }
+        },
+        components:{
+            PostCard
         },
         methods:{
             getPosts(post_page){
@@ -46,32 +50,7 @@ import axios from 'axios';
             <div v-else class="col-12">
                 <div class="row d-flex flex-wrap justify-content-center">
                     <div class="col-3" v-for="post in posts" :key="post.id">
-                        <div class="card my-3">
-                            <div class="card-body">
-                                <div class="img-top">
-                                    <img class="img-fluid" :src="post.cover_image != null ? `${baseUrl}/storage/${post.cover_image}` : 'https://via.placeholder.com/400x300'" :alt="post.title">
-                                </div>
-                                <div class="card-author py-2">
-                                    <h4>{{ post.author }}</h4>
-                                </div>
-                                <div class="card-title py-2">
-                                    <h4>{{ post.title }}</h4>
-                                    <p>
-                                        <strong>Category:</strong> {{ post.category.name }}
-                                    </p>
-                                    <p>
-                                        <em>
-                                            <strong>Tags: </strong>
-                                            <span class="mx-1 btn btn-sm btn-primary" v-for="tag in post.tags"> {{ tag.name }} </span>                                            
-                                        </em>
-                                    </p>
-                                </div>
-                                <div class="card-text py-2">
-                                    {{ post.excerpt }}
-                                </div>
-                                <a href="#" class="btn btn-sm btn-secondary my-2">Continue To Read</a>
-                            </div>
-                        </div>
+                        <PostCard :post="post" :baseUrl="baseUrl" />
                     </div>
                 </div>
                 <div class="row">
